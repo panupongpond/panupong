@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Professional Resume</title>
   <style>
+    @media screen and (max-width: 680px) {
+        div {
+            flex-direction: column;
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            &.hero-img1 img {
+                width: 50%;
+                padding: 1rem;
+                border-radius: 100%;
+                margin: 0 auto;
+            }
+            &.hero-img2 img {
+                width: 80%;
+                padding: 1rem;
+                border-radius: 100%;
+            }
+        }   
+    }
     *{
         margin: 0;
         padding: 0;
@@ -23,7 +42,7 @@
       transition: background-color 0.5s ease-in-out;
     }
     .nav-con {
-      display: flex;
+      display: flex ;
       justify-content: space-between; 
     }
     .logo a {
@@ -121,7 +140,6 @@
                 <li><a href="CV_POND_NEW1.html">HOME</a></li>
                 <li><a href="Experience.html">Experience</a></li>
                 <li><a href="Skills.html">Skills</a></li>
-                <li><a href="#">Contact Us</a></li>
             </ul>
             </div>
         </div>
