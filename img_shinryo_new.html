@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBn5/ghJTY5cePMuQY2XJCCVw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-800 */
+        }
+        .gallery-item {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-16">
+                <div class="flex items-center">
+                    <span class="font-extrabold text-xl text-cyan-700 flex items-center">
+                        <i class="fas fa-camera-retro mr-2 text-cyan-600"></i> Photo Gallery
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-16">
+        <section id="gallery" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-center text-cyan-800 mb-12">
+                <i class="fas fa-images mr-3 text-cyan-600"></i> Shinryo Thailand Company
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <img src="S-1.jpg" alt="Gallery Image 1" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-2.jpg" alt="Gallery Image 2" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-3.jpg" alt="Gallery Image 3" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-4.jpg" alt="Gallery Image 4" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-5.jpg" alt="Gallery Image 5" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-6.jpg" alt="Gallery Image 6" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-7.jpg" alt="Gallery Image 7" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-8.jpg" alt="Gallery Image 8" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-9.jpg" alt="Gallery Image 9" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-10.jpg" alt="Gallery Image 10" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-11.jpg" alt="Gallery Image 15" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-12.jpg" alt="Gallery Image 16" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-13.jpg" alt="Gallery Image 17" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-14.jpg" alt="Gallery Image 18" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-15.jpg" alt="Gallery Image 19" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-16.jpg" alt="Gallery Image 20" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-17.jpg" alt="Gallery Image 21" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-18.jpg" alt="Gallery Image 22" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-19.jpg" alt="Gallery Image 23" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-20.jpg" alt="Gallery Image 24" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-21.jpg" alt="Gallery Image 25" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-22.jpg" alt="Gallery Image 26" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-23.jpg" alt="Gallery Image 27" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-24.jpg" alt="Gallery Image 28" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-25.jpg" alt="Gallery Image 29" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-26.jpg" alt="Gallery Image 30" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-27.jpg" alt="Gallery Image 1" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-28.jpg" alt="Gallery Image 2" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-29.jpg" alt="Gallery Image 3" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-30.jpg" alt="Gallery Image 4" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-31.jpg" alt="Gallery Image 5" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-32.jpg" alt="Gallery Image 6" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-33.jpg" alt="Gallery Image 7" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-34.jpg" alt="Gallery Image 8" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+                <img src="S-35.jpg" alt="Gallery Image 9" class="w-full h-48 object-cover rounded-lg shadow-md gallery-item">
+            </div>
+        </section>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-button">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <footer class="bg-slate-900 text-slate-400 mt-20 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p class="mb-1">&copy; 2025  MR.PANUPONG TUALAMUN</p>
+            <p>PLC and SCADA Engineer</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="http://www.google.com/" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fab fa-github fa-lg"></i></a>
+                <a href="mailto:panupong091858@gmail.com" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fas fa-envelope fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeButton = document.querySelector('.close-button');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    lightbox.style.display = 'flex';
+                    lightboxImg.src = this.src;
+                });
+            });
+
+            closeButton.addEventListener('click', function() {
+                lightbox.style.display = 'none';
+            });
+
+            lightbox.addEventListener('click', function(event) {
+                if (event.target === lightbox) {
+                    lightbox.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

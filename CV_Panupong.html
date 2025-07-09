@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV : PANUPONG TUALAMUN - PLC & SCADA Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link hrel="https://fontawesome.com/icons/gear-code?f=classic&s=regular">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBn5/ghJTY5cePMuQY2XJCCVw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-800 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height for chart */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px; /* Slightly taller on desktop */
+            }  
+        }
+
+        /* Navigation Link Styling */
+        .nav-link {
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            padding-bottom: 5px; /* Space for underline */
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0891b2; /* cyan-600 */
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .nav-link.active {
+             color: #0e7490; /* cyan-700 */
+        }
+
+        /* Tab Button Styling */
+        .tab-button {
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            color: #475569; /* slate-600 */
+            position: relative;
+            overflow: hidden;
+        }
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(8, 145, 178, 0.1), transparent);
+            transition: left 0.4s ease;
+            z-index: 0;
+        }
+        .tab-button:hover::before {
+            left: 0;
+        }
+        .tab-button.active {
+            border-color: #0891b2; /* cyan-600 */
+            background-color: #e0f2fe; /* sky-100 */
+            color: #0e7490; /* cyan-700 */
+            font-weight: 600;
+        }
+
+        /* Card Hover Effect */
+        .feature-card, .recommendation-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover, .recommendation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Timeline Specific Styling */
+        .timeline-item-left .timeline-content {
+            border-left: 4px solid #06b6d4; /* cyan-500 */
+        }
+        .timeline-item-right .timeline-content {
+            border-right: 4px solid #0891b2; /* cyan-600 */
+        }
+        @media (max-width: 700px) { /* Adjust for small screens */
+            .timeline-item-right .timeline-content {
+                border-right: none;
+                border-left: 4px solid #000000; /* cyan-600 */
+            }
+        }
+        .timeline-dot {
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 5px rgba(8, 145, 178, 0.3);
+        }
+
+        /* Animation for sections */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-extrabold text-xl text-cyan-700 flex items-center">
+                        <i class="fas fa-microchip mr-2 text-cyan-600"></i> PLC & SCADA ENGINEER
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#timeline" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-700">Experience</a>
+                        <a href="#features" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-700">Skills</a>
+                      <!-- <a href="#explorer" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-700">Education</a> -->
+                        <a href="#migration" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-700">Education</a>
+                       <!-- <a href="#recommendations" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-700">ข้อเสนอแนะ</a>  -->
+                        <a href="#hero" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-cyan-700">Main</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <!-- Added id="mobile-menu-button" for JavaScript interaction -->
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-cyan-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="md:hidden" id="mobile-menu" style="display: none;"> 
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#timeline" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-cyan-50 hover:text-cyan-700">Experience</a>
+                <a href="#features" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-cyan-50 hover:text-cyan-700">Skills</a>
+                <!--<a href="#explorer" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-cyan-50 hover:text-cyan-700">Education</a> -->
+                <a href="#migration" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-cyan-50 hover:text-cyan-700">การย้ายระบบ</a>
+               <!--  <a href="#recommendations" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-cyan-50 hover:text-cyan-700">ข้อเสนอแนะ</a> -->
+                <a href="#hero" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-cyan-50 hover:text-cyan-700">Main</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <section id="hero" class="text-center py-16 bg-gradient-to-br from-white to-cyan-50 rounded-xl shadow-lg fade-in">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight drop-shadow-sm">
+                MR. <span class="text-cyan-600">PANUPONG TUALAMUN</span>
+            </h1>
+            <p class="mt-6 text-lg md:text-xl text-slate-700 max-w-4xl mx-auto leading-relaxed">
+                I am a control systems engineer with experience in various fields, including food factories, industrial plants, water pumping stations, large-scale cooling systems and Electrical system.
+            </p>
+            <p class="mt-4 text-md md:text-lg text-slate-600 max-w-4xl mx-auto leading-relaxed">
+                I have Translated in SCADA Systems, Programming PLCs and DCS, SQL Server, Motion Control Systems, SQL Server Integration Services(SSIS), Motor Drivers (servo and induction), Instrumentation, Data Communication, OPC UA Systems, HMI, Control Valves, IoT, Control Panel Design And Control System Design.
+            </p>
+            <p class="mt-4 text-md md:text-lg text-slate-600 max-w-4xl mx-auto leading-relaxed">
+                Graduated from <span class="font-semibold text-slate-800">King Mongkut's University Of Technology North Bangkok</span> with a Second-Class Honors degree in <span class="font-semibold text-slate-800">Instrumentation System Engineering</span>.
+            </p>
+            <div class="mt-10 flex justify-center gap-4 flex-wrap">
+                <div class="bg-white border border-slate-200 rounded-full px-5 py-2 text-sm font-medium text-slate-700 shadow-md flex items-center hover:scale-105 transition-transform">
+                    <i class="text-green-500 mr-2"></i>🖥️PLC, DCS and SCADA
+                </div>
+                <div class="bg-white border border-slate-200 rounded-full px-5 py-2 text-sm font-medium text-slate-700 shadow-md flex items-center hover:scale-105 transition-transform">
+                    <i class="text-indigo-500 mr-2"></i>🌐Data Communication
+                </div>
+                <div class="bg-white border border-slate-200 rounded-full px-5 py-2 text-sm font-medium text-slate-700 shadow-md flex items-center hover:scale-105 transition-transform">
+                    <i class="text-orange-500 mr-2"></i>⚙️Motion Control
+                </div>
+                <div class="bg-white border border-slate-200 rounded-full px-5 py-2 text-sm font-medium text-slate-700 shadow-md flex items-center hover:scale-105 transition-transform">
+                    <i class="text-orange-500 mr-2"></i>🗜️Instrumentation
+                </div>
+                <div class="bg-white border border-slate-200 rounded-full px-5 py-2 text-sm font-medium text-slate-700 shadow-md flex items-center hover:scale-105 transition-transform">
+                    <i class="text-orange-500 mr-2"></i>📡Internet Of Things (IoT)
+                </div>
+                <div class="bg-white border border-slate-200 rounded-full px-5 py-2 text-sm font-medium text-slate-700 shadow-md flex items-center hover:scale-105 transition-transform">
+                    <i class="text-orange-500 mr-2"></i>🗄️SQL Server
+                </div>
+                <div class="bg-white border border-slate-200 rounded-full px-5 py-2 text-sm font-medium text-slate-700 shadow-md flex items-center hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-code text-orange-500 mr-2"></i>Code Program
+                </div>
+            </div>
+        </section>
+
+        <div class="border-t border-slate-200 my-20 opacity-75"></div>
+
+        <section id="timeline" class="py-12 fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 drop-shadow-sm">Experience for Panupong</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                    I have Translated in SCADA Systems, Programming PLCs and DCS, SQL Server, Motion Control Systems, SQL Server Integration Services(SSIS), Motor Drivers (servo and induction), Instrumentation, Data Communication, OPC UA Systems, HMI, Control Valves, IoT, Control Panel Design And Control System Design.
+                </p>
+            </div>
+            <div class="relative">
+                <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-cyan-700 hidden sm:block rounded-full transform -translate-x-1/2"></div>
+                <div class="space-y-16">
+                    <div class="flex sm:items-center flex-col sm:flex-row timeline-item timeline-item-left">
+                        <div class="sm:w-1/2 sm:pr-8">  
+                            <div class="bg-white p-6 rounded-xl shadow-xl timeline-content border-l-4 border-cyan-500 hover:shadow-2xl feature-card">
+                                <p class="text-sm text-cyan-600 font-semibold mb-1"><i class="fas fa-calendar-alt mr-2"></i>2024 - Present</p>
+                                <h3 class="text-xl font-bold mt-1 text-slate-900">PLC and SCADA Engineer</h3>
+                                <p class="mt-2 text-slate-700 font-medium">GRANDLINE INNOVATION COMPANY LIMITED</p>
+                                <ul class="list-disc pl-5 mt-3 text-slate-600 text-sm space-y-1">
+                                    <li>Do Program PLC Control Machine And Process Using PLC Allen-Bradley(Rockwell), PLC Siemens </li>
+                                    <li>Do Graphics and Animation of SCADA</li>
+                                    <li>Communication Drive Motor(VSD), Encoder, SCADA, PLC</li>
+                                    <li>Do Data Log And SQL Server Mapping Tag </li>
+                                    <li>Design SCADA</li>
+                                    <li>Do SSIS (SQL Server Integration Services) of Data Server </li>
+                                    <li>Communication as EtherNet/IP, Modbus/TCP, Profinet, RS-485, RS-422, Heart Protocol, CANBUS </li>
+                                    <li>Design Control Cabinet</li>
+                                    <li>Design Signal Control Wiring </li>
+                                    <li>Signal such as Digital Input, Digital Output, Analog Input, Analog Output and Pulse Input</li>
+                                    <li>Do Input and Output List</li>
+                                </ul>
+                                <div class="flex justify-center mt-8">
+                                    <img src="Gli.jpeg" alt="ภาพประกอบโครงการ PLC และ SCADA" class="max-w-full h-auto rounded-lg shadow-lg" style="max-width: 150px;">
+                                </div>
+                                <div class="flex justify-center space-x-8 mt-8">
+                                    <a href="img_Gli_new.html" class="text-slate-800 hover:text-cyan-800 transition-colors text-cyan-600 text-6xl mb-6"><i class="fa-regular fa-image"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative sm:w-1/2 sm:pl-8 mt-4 sm:mt-0 flex justify-center sm:block">
+                             <div class="absolute sm:left-[-15px] top-1/2 -translate-y-1/2 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-50 shadow-md timeline-dot"></div>
+                        </div>
+                    </div>
+                
+
+                    <div class="flex sm:items-center flex-col sm:flex-row-reverse timeline-item timeline-item-right">
+                        <div class="sm:w-1/2 sm:pl-8">
+                             <div class="bg-white p-6 rounded-xl shadow-xl timeline-content border-r-4 sm:border-l-4 sm:border-r-0 border-cyan-600 hover:shadow-2xl feature-card">
+                                <p class="text-sm text-cyan-700 font-semibold mb-1"><i class="fas fa-calendar-alt mr-2"></i>2023 - 2024</p>
+                                <h3 class="text-xl font-bold mt-1 text-slate-900">Programmer Control PLC Engineer</h3>
+                                <p class="mt-2 text-slate-700 font-medium">Kinetix Company</p>
+                                <ul class="list-disc pl-5 mt-3 text-slate-600 text-sm space-y-1">
+                                    <li>Do Program PLC Control Machine And Process Using PLC Allen-Bradley(Rockwell), PLC Siemens </li>
+                                    <li>Do Program Control Servo Motor (Control Position Servo Motor And Synchronize Servo Motor)</li>
+                                    <li>Communication Drive Motor, Encoder, HMI, PLC</li>
+                                    <li>Communication as EtherNet/IP, Modbus/TCP, RS-485, RS-422, Heart Protocol </li>
+                                    <li>Design HMI</li>
+                                    <li>Design Control Cabinet</li>
+                                    <li>Design Signal Control Wiring And Wiring </li>
+                                    <li>Signal such as Digital Input, Digital Output, Analog Input, Analog Output and Pulse Input</li>
+                                    <li>Do Input and Output List</li>
+                                </ul>
+                                 <div class="flex justify-center mt-8">
+                                    <img src="Kinetix.png" alt="ภาพประกอบโครงการ PLC และ SCADA" class="max-w-full h-auto rounded-lg shadow-lg" style="max-width: 150px;">
+                                </div>
+                                <div class="flex justify-center space-x-8 mt-8">
+                                    <a href="Image_kinetix_new.html" class="text-slate-800 hover:text-cyan-800 transition-colors text-cyan-600 text-6xl mb-6"><i class="fa-regular fa-image"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative sm:w-1/2 sm:pr-8 mt-4 sm:mt-0 flex justify-center sm:block">
+                           <div class="absolute sm:right-[-15px] sm:left-auto top-1/2 -translate-y-1/2 w-8 h-8 bg-cyan-600 rounded-full border-4 border-slate-50 shadow-md timeline-dot"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex sm:items-center flex-col sm:flex-row timeline-item timeline-item-left">
+                        <div class="sm:w-1/2 sm:pr-8">
+                            <div class="bg-white p-6 rounded-xl shadow-xl timeline-content border-l-4 border-cyan-700 hover:shadow-2xl feature-card">
+                                <p class="text-sm text-cyan-800 font-semibold mb-1"><i class="fas fa-calendar-alt mr-2"></i>2022 - 2023</p>
+                                <h3 class="text-xl font-bold mt-1 text-slate-900">Control And Instrumentation Engineer</h3>
+                                <p class="mt-2 text-slate-700 font-medium">Shinryo Thailand Company</p>
+                                <ul class="list-disc pl-5 mt-3 text-slate-600 text-sm space-y-1">
+                                    <li>Do Instrumentation List Specification such as Flow meter,  Pressure Transmitter,  Difference Pressure Transmitter, Level Transmitter, RTD, Vibation Transmitter, Ambient Transmitter, Pressure Gauge, Temperature Gauge and  Difference Pressure Switch</li>
+                                    <li>Do Instrumentation Specification such as Communication, Signal, Material, Installation, Ingress Protection (IP)</li>
+                                    <li>Do DCS Specification such as Model, Power Supply, Signal</li>
+                                    <li>Adjust Program DCS of Database</li>
+                                    <li>Do Input and Output List</li>
+                                    <li>Communication as  RS-485, RS-422, Heart Protocol </li>
+                                    <li>Signal such as 4-20mA, Digital Input, Digital Output, Analog Input, Analog Output and Pulse Input</li>
+                                </ul>
+                                <div class="flex justify-center mt-8">
+                                    <img src="Shinryo.png" alt="ภาพประกอบโครงการ PLC และ SCADA" class="max-w-full h-auto rounded-lg shadow-lg" style="max-width: 150px;">
+                                </div>
+                                <div class="flex justify-center space-x-8 mt-8">
+                                    <a href="img_shinryo_new.html" class="text-slate-800 hover:text-cyan-800 transition-colors text-cyan-600 text-6xl mb-6"><i class="fa-regular fa-image"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="relative sm:w-1/2 sm:pl-8 mt-4 sm:mt-0 flex justify-center sm:block">
+                            <div class="absolute sm:left-[-15px] top-1/2 -translate-y-1/2 w-8 h-8 bg-cyan-700 rounded-full border-4 border-slate-50 shadow-md timeline-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-t border-slate-200 my-20 opacity-75"></div>
+
+        <section id="features" class="py-12 fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 drop-shadow-sm">Skills</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                </p>
+            </div>
+            
+            <div id="tabs-container" class="mb-8 bg-white p-2 rounded-xl shadow-inner">
+                <div class="flex justify-center flex-wrap gap-2 sm:gap-4">
+                    <button data-tab="security" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class="mr-2"></i>🖥️PLC and DCS</button>
+                    <button data-tab="connectivity" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class="fa-solid fa-display mr-2"></i>SCADA System</button>
+                    <button data-tab="engineering" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class=" mr-2"></i>⚙️Motion Control</button>
+                    <button data-tab="SQL" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class=" mr-2"></i>🗄️SQL Server</button>
+                    <button data-tab="Data" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class=" mr-2"></i>🌐Data Communication</button>
+                    <button data-tab="runtime" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class="fas fa-tachometer-alt mr-2"></i>SQL Server Integration Services(SSIS)</button>
+                    <button data-tab="HMI" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class="fa-solid fa-tablet mr-2"></i>Human Machine Interface (HMI)</button>
+                    <button data-tab="ControlValve" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class="fa-solid fa-gears mr-2"></i>Control Valve</button>
+                    <button data-tab="Instrumentation" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class=" mr-2"></i>🗜️Instrumentation</button>
+                    <button data-tab="IoT" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class=" mr-2"></i>📡Internet Of Things (IoT)</button>
+                    <button data-tab="OPCSystem" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class="fa-solid fa-sitemap mr-2"></i>OPC System</button>
+                    <button data-tab="CodeProgram" class="tab-button text-sm sm:text-base px-4 py-2 font-semibold border-b-2 rounded-lg transition"><i class=" mr-2"></i>💻Code Program</button>
+                </div>
+            </div>
+
+            <div id="tabs-content" class="bg-white p-6 sm:p-8 rounded-xl shadow-xl min-h-[350px] flex items-center justify-center">
+                <div id="tab-content-security" class="tab-content text-center fade-in">
+                    <i class="text-cyan-600 text-6xl mb-6">🖥️</i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">Programmable Logic Controller and Distributed Control System</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                        --------------------------------------------- <span class="font-bold text-slate-900">-----</span> -------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Allen-Bradley(Rockwell)</span></li>
+                        <li><span class="font-semibold">Siemens</span></li>
+                        <li><span class="font-semibold">Mitsubishi</span></li>
+                        <li><span class="font-semibold">Emerson</span></li>
+                        <li><span class="font-semibold">YOKOGAWA</span></li>
+                        <li><span class="font-semibold">ABB</span></li>
+                    </ul>
+                </div>
+
+                <div id="tab-content-connectivity" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-display text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">SCADA System</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       -------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">FactoryTalk View Rockwell</span></li>
+                        <li><span class="font-semibold">SIMATIC WinCC Siemens</span></li>
+                        <li><span class="font-semibold">Cimplicity</span></li>
+                    </ul>
+                </div>
+
+                <div id="tab-content-runtime" class="tab-content hidden text-center fade-in">
+                   <i class="fa-solid fa-database text-cyan-600 text-6xl mb-6"></i>
+                   <h3 class="text-3xl font-bold text-cyan-800 mb-4">SQL Server Integration Services(SSIS)</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                        -----------------------------------------------------------------------
+                    </p>
+                     <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Microsoft SQL Server</span></li>
+                    </ul>
+                </div>
+
+                <div id="tab-content-engineering" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-gear text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">Motion Control</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Allen-Bradley(Rockwell)</span></li>
+                        <li><span class="font-semibold">Siemens</span></li>
+                    </ul>
+                </div>
+                <div id="tab-content-SQL" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-database text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">SQL Server</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Microsoft SQL Server</span></li>
+                    </ul>
+                </div>
+                <div id="tab-content-Data" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-network-wired text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">Data Communication</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">EtherNet/IP</span></li>
+                        <li><span class="font-semibold">PROFINET</span></li>
+                        <li><span class="font-semibold">ModbusTCP/IP</span></li>
+                        <li><span class="font-semibold">PROFIBUS</span></li>
+                        <li><span class="font-semibold">RS-485</span></li>
+                        <li><span class="font-semibold">RS-422</span></li>
+                        <li><span class="font-semibold">RS-232</span></li>
+                        <li><span class="font-semibold">Heart Protocol</span></li>
+                    </ul>
+                </div>
+                 <div id="tab-content-HMI" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-tablet text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">Human Machine Interface (HMI)</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Allen-Bradley(Rockwell)</span></li>
+                        <li><span class="font-semibold">Siemens</span></li>
+                        <li><span class="font-semibold">Mitsubishi</span></li>
+                    </ul>
+                </div>
+                <div id="tab-content-ControlValve" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-gears text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font5-bold text-cyan-800 mb-4">Control Valve</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Motor Operated Valve</span></li>
+                        <li><span class="font-semibold">Pneumatic Operated Valve</span></li>
+                    </ul>
+                </div>
+                <div id="tab-content-Instrumentation" class="tab-content hidden text-center fade-in">
+                    <i class="fas fa-screwdriver text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">Instrumentation</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Flow meter</span></li>
+                        <li><span class="font-semibold">Pressure Transmitter</span></li>
+                        <li><span class="font-semibold">Difference Pressure Transmitter</span></li>
+                        <li><span class="font-semibold">Level Transmitter</span></li>
+                        <li><span class="font-semibold">RTD</span></li>
+                        <li><span class="font-semibold">Vibation Transmitter</span></li>
+                        <li><span class="font-semibold">Ambient Transmitter</span></li>
+                        <li><span class="font-semibold">Pressure Gauge</span></li>
+                        <li><span class="font-semibold">Temperature Gauge</span></li>
+                        <li><span class="font-semibold">Difference Pressure Switch</span></li>
+                    </ul>
+                </div>
+                <div id="tab-content-OPCSystem" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-sitemap text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">OPC System</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">KEP Server EX</span></li>
+                    </ul>
+                </div>
+                <div id="tab-content-CodeProgram" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-code text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">Code Program</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">Python</span></li>
+                        <li><span class="font-semibold">JavaScript</span></li>
+                        <li><span class="font-semibold">C#</span></li>
+                        <li><span class="font-semibold">HTML, CSS</span></li>
+                    </ul>
+                </div>
+                <div id="tab-content-IoT" class="tab-content hidden text-center fade-in">
+                    <i class="fa-solid fa-code-branch text-cyan-600 text-6xl mb-6"></i>
+                    <h3 class="text-3xl font-bold text-cyan-800 mb-4">Internet Of Things</h3>
+                    <p class="text-slate-600 mb-4 max-w-2xl mx-auto">
+                       ----------------------------------------------------------------------------------
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 text-left inline-block">
+                        <li><span class="font-semibold">SIMATIC IoT (Siemens)</span></li>
+                        <li><span class="font-semibold">Node-Red</span></li>
+                        <li><span class="font-semibold">Grafana Cloud</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-t border-slate-200 my-20 opacity-75"></div>
+
+        <!--<section id="explorer" class="py-12 fade-in">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 drop-shadow-sm">ไขข้อข้องใจเกี่ยวกับ WinCC Explorer</h2>
+                    <p class="mt-4 text-lg text-slate-600">
+                        ส่วนนี้จะอธิบายบทบาทที่แท้จริงของ WinCC Explorer และการปรับปรุงที่สำคัญในเวอร์ชัน V8.1 เพื่อให้คุณเข้าใจและใช้งานเครื่องมือนี้ได้อย่างเต็มประสิทธิภาพ
+                    </p>
+                    <div class="mt-8 space-y-6">
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-md feature-card">
+                            <h4 class="font-semibold text-xl text-slate-800 flex items-center"><i class="fas fa-info-circle text-cyan-500 mr-3"></i>ไม่ใช่โปรแกรมเดี่ยว แต่เป็นหัวใจหลัก</h4>
+                            <p class="text-md text-slate-600 mt-2">WinCC Explorer คือสภาพแวดล้อมการกำหนดค่าส่วนกลาง ไม่ใช่แอปพลิเคชันแบบสแตนด์อะโลน เวอร์ชันของมันจึงสอดคล้องกับเวอร์ชันของ WinCC หลักเสมอ (เช่น V8.1)</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-md feature-card">
+                            <h4 class="font-semibold text-xl text-slate-800 flex items-center"><i class="fas fa-clock text-cyan-500 mr-3"></i>ฟังก์ชันใหม่ใน V8.1 ที่ช่วยประหยัดเวลา</h4>
+                            <p class="text-md text-slate-600 mt-2">เพิ่ม <span class="font-bold text-slate-900">"ฟังก์ชันการกรอง"</span> และ <span class="font-bold text-slate-900">"การค้นหาอัจฉริยะ"</span> ช่วยให้วิศวกรทำงานกับโปรเจกต์ขนาดใหญ่ได้ง่ายและรวดเร็วยิ่งขึ้นอย่างเห็นได้ชัด</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-100 p-8 rounded-xl border border-slate-200 shadow-inner hidden md:block">
+                     <div class="flex items-center justify-between text-sm text-slate-500 mb-3">
+                        <span class="font-mono text-slate-600"><i class="fas fa-folder-open mr-2 text-yellow-500"></i>WinCC Explorer - Project (Large_Scale_Factory)</span>
+                        <span class="text-cyan-700">V8.1</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md h-80 overflow-y-auto border border-slate-300">
+                       <div class="flex items-center justify-between mb-4">
+                           <input type="text" placeholder="🔍 ค้นหาอัจฉริยะ... 'Motor_3B'" class="w-2/3 border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500" value="">
+                           <button class="text-sm bg-cyan-100 text-cyan-700 px-4 py-2 rounded-md font-semibold hover:bg-cyan-200 transition-colors"><i class="fas fa-filter mr-2"></i>ตัวกรอง</button>
+                       </div>
+                       <div class="space-y-1 text-sm text-slate-700">
+                           <div class="p-2 rounded bg-yellow-50/70 hover:bg-yellow-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-folder mr-2 text-yellow-600"></i>Graphics/Area_3/Pumps</div>
+                           <div class="p-2 pl-8 rounded hover:bg-slate-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-file-alt mr-2 text-slate-500"></i>Screen_Motor_3A.pdl</div>
+                           <div class="p-2 pl-8 rounded bg-cyan-50 font-semibold border-l-2 border-cyan-500 hover:bg-cyan-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-file-alt mr-2 text-cyan-600"></i>Screen_Motor_3B.pdl</div>
+                           <div class="p-2 pl-8 rounded hover:bg-slate-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-file-alt mr-2 text-slate-500"></i>Screen_Motor_3C.pdl</div>
+                           <div class="p-2 rounded hover:bg-slate-50 transition-colors cursor-pointer flex items-center"><i class="fas fa-folder mr-2 text-yellow-600"></i>Tags/Group_3</div>
+                           <div class="p-2 pl-8 rounded hover:bg-slate-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-tag mr-2 text-blue-500"></i>Motor_3A_Speed</div>
+                           <div class="p-2 pl-8 rounded bg-cyan-50 font-semibold border-l-2 border-cyan-500 hover:bg-cyan-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-tag mr-2 text-cyan-600"></i>Motor_3B_Status</div>
+                           <div class="p-2 pl-8 rounded hover:bg-slate-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-tag mr-2 text-blue-500"></i>Motor_3B_Temp</div>
+                           <div class="p-2 rounded hover:bg-slate-50 transition-colors cursor-pointer flex items-center"><i class="fas fa-folder mr-2 text-yellow-600"></i>Scripts/Alarms</div>
+                           <div class="p-2 pl-8 rounded hover:bg-slate-100 transition-colors cursor-pointer flex items-center"><i class="fas fa-file-code mr-2 text-purple-500"></i>Alarm_Processing.vbs</div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <div class="border-t border-slate-200 my-20 opacity-75"></div>
+        
+        <section id="migration" class="py-12 fade-in">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 drop-shadow-sm">Education</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                    Graduated from [King Mongkut's University Of Technology North Bangkok] with a Second-Class Honors degree in [Instrumentation System Engineering].
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="bg-white p-8 rounded-xl shadow-xl feature-card">
+                    <h3 class="text-2xl font-bold mb-6 text-slate-900 flex items-center"><i class="fas fa-arrow-alt-circle-up mr-3 text-emerald-500"></i>2019-2022</h3>
+                     <p class="text-slate-700 mb-8 leading-relaxed">
+                        King Mongkut's University Of Technology North Bangkok
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="bg-cyan-50 text-cyan-800 font-mono text-base px-4 py-2 rounded-lg shadow-sm">Instrumentation System Engineering</div>
+                            <div class="flex-grow border-t-2 border-dashed border-slate-300 mx-4"></div>
+                             <span class="text-4xl text-emerald-500">→</span>
+                            <div class="bg-emerald-500 text-white font-mono text-base px-4 py-2 rounded-lg shadow-md ml-4">Second-Class Honors degree GPA 3.43</div>
+                        </div>
+                        <div class="flex justify-center mt-8">
+                            <img src="logo-kmutnb.jpg" alt="ภาพประกอบโครงการ PLC และ SCADA" class="max-w-full h-auto rounded-lg shadow-lg" style="max-width: 150px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-xl feature-card">
+                    <h3 class="text-2xl font-bold mb-6 text-slate-900 flex items-center"><i class="fas fa-arrow-alt-circle-up mr-3 text-emerald-500"></i>2016-2018</h3>
+                     <p class="text-slate-700 mb-8 leading-relaxed">
+                        Lampang Technical college
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="bg-cyan-50 text-cyan-800 font-mono text-base px-4 py-2 rounded-lg shadow-sm">Mechatronics</div>
+                            <div class="flex-grow border-t-2 border-dashed border-slate-300 mx-4"></div>
+                             <span class="text-4xl text-emerald-500">→</span>
+                            <div class="bg-emerald-500 text-white font-mono text-base px-4 py-2 rounded-lg shadow-md ml-4">GPA 3.71</div>
+                        </div>
+                        <div class="flex justify-center mt-8">
+                            <img src="TECHNICAL.png" alt="ภาพประกอบโครงการ PLC และ SCADA" class="max-w-full h-auto rounded-lg shadow-lg" style="max-width: 150px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--<div class="border-t border-slate-200 my-20 opacity-75"></div>
+
+        <section id="recommendations" class= "py-12 fade-in">"py-12 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl -mx-4 px-4 sm:-mx-8 sm:px-8 shadow-inner fade-in"> 
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 drop-shadow-sm">สรุป</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+                    XXXXXXXX
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-100 recommendation-card">
+                    <div class="text-center text-5xl text-red-500 mb-4"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h4 class="font-bold text-xl text-cyan-800 text-center mb-2">1. XXX</h4>
+                    <p class="mt-2 text-slate-700 text-center">
+                        XXXXX
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-100 recommendation-card">
+                    <div class="text-center text-5xl text-purple-500 mb-4"><i class="fas fa-rocket"></i></div>
+                    <h4 class="font-bold text-xl text-cyan-800 text-center mb-2">2. XXXXXXX</h4>
+                    <p class="mt-2 text-slate-700 text-center">
+                        XXXXXX
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-100 recommendation-card">
+                    <div class="text-center text-5xl text-blue-500 mb-4"><i class="fas fa-infinity"></i></div>
+                    <h4 class="font-bold text-xl text-cyan-800 text-center mb-2">3. XXXXXXX</h4>
+                    <p class="mt-2 text-slate-700 text-center">
+                       XXXX
+                    </p>
+                </div>
+            </div>
+        </section> -->
+
+    </main>
+    
+    <footer class="bg-slate-900 text-slate-400 mt-20 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p class="mb-1">&copy; 2025  MR.PANUPONG TUALAMUN</p>
+            <p>PLC and SCADA Engineer</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="https://github.com/panupongpond/panupong" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fab fa-github fa-lg"></i></a>
+                <a href="mailto:panupong091858@gmail.com" class="text-slate-400 hover:text-cyan-400 transition-colors"><i class="fas fa-envelope fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for nav links & active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section'); // Select all main sections
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', function () {
+                const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+                this.setAttribute('aria-expanded', !expanded);
+                mobileMenu.style.display = expanded ? 'none' : 'block'; // Toggle display
+            });
+
+            const allNavLinks = document.querySelectorAll('a[href^="#"]');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent default anchor jump
+
+                    // Close mobile menu if it's open
+                    if (mobileMenu.style.display === 'block') {
+                        mobileMenu.style.display = 'none';
+                        mobileMenuButton.setAttribute('aria-expanded', false);
+                    }
+
+                    // Smooth scroll to the target section
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Function to set active nav link
+            const setActiveNavLink = () => {
+                let currentActive = null;
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - document.querySelector('header').offsetHeight - 50; // Offset for header height
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                        currentActive = section.id;
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === currentActive) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            // Initial call and on scroll
+            setActiveNavLink();
+            window.addEventListener('scroll', setActiveNavLink);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - document.querySelector('header').offsetHeight;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Tab functionality for Skills section
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            function activateTab(tabId) {
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                tabContents.forEach(content => {
+                    content.classList.remove('fade-in'); // Remove current animation class
+                    content.classList.add('hidden'); // Hide all first
+                    content.classList.remove('appear'); // Ensure no lingering "appear" state
+                });
+
+                // Find the clicked button and content
+                const activeButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+                const activeContent = document.getElementById(`tab-content-${tabId}`);
+
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+                if (activeContent) {
+                    activeContent.classList.remove('hidden');
+                    // Trigger reflow to restart animation
+                    void activeContent.offsetWidth; 
+                    activeContent.classList.add('fade-in', 'appear');
+                }
+            }
+
+            // Set initial active tab
+            if (tabButtons.length > 0) {
+                activateTab(tabButtons[0].dataset.tab);
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    activateTab(button.dataset.tab);
+                });
+            });
+            
+            // Chart.js Lifecycle Chart
+            const ctx = document.getElementById('lifecycleChart');
+            if(ctx) {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [''], // Single label for the bar
+                        datasets: [
+                            {
+                                label: 'การสนับสนุนมาตรฐาน (Standard Support)',
+                                data: [{x: [2024, 2028], y: ''}], // Adjusted y-value to empty string
+                                backgroundColor: 'rgba(56, 189, 248, 0.7)', // sky-400
+                                borderColor: 'rgba(14, 165, 233, 1)', // sky-500
+                                borderWidth: 1,
+                                barPercentage: 0.8, // Make bars thicker
+                            },
+                            {
+                                label: 'การสนับสนุนระยะยาว (LTS)',
+                                data: [{x: [2028, 2032], y: ''}], // Adjusted y-value to empty string
+                                backgroundColor: 'rgba(6, 182, 212, 0.7)', // cyan-500
+                                borderColor: 'rgba(8, 145, 178, 1)', // cyan-600
+                                borderWidth: 1,
+                                barPercentage: 0.8,
+                            }
+                        ]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                min: 2024,
+                                max: 2033, // Extend max slightly for better visual
+                                stacked: true,
+                                title: {
+                                    display: true,
+                                    text: 'ปี (ค.ศ.)',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    },
+                                    color: '#475569'
+                                },
+                                ticks: {
+                                    stepSize: 1 // Show every year
+                                },
+                                grid: {
+                                    display: false // Hide x-axis grid lines
+                                }
+                            },
+                             y: {
+                                stacked: true,
+                                ticks: {
+                                    display: false // Hide y-axis labels as we only have one category
+                                },
+                                grid: {
+                                    display: false // Hide y-axis grid lines
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        size: 13
+                                    },
+                                    color: '#475569',
+                                    boxWidth: 20, // Adjust legend box size
+                                    boxHeight: 10
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const datasetLabel = context.dataset.label || '';
+                                        const range = context.raw.x;
+                                        return `${datasetLabel}: ${range[0]} - ${range[1]}`;
+                                    }
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'การสนับสนุนผลิตภัณฑ์ WinCC V8.1 (โดยประมาณ)',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                },
+                                color: '#334155',
+                                padding: {
+                                    top: 10,
+                                    bottom: 20
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 1500, // Animation duration
+                            easing: 'easeInOutQuart' // Easing function
+                        }
+                    }
+                });
+            }
+
+            // Intersection Observer for fade-in animations
+            const fadeInSections = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the section is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            fadeInSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
